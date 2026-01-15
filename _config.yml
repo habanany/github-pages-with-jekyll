@@ -2,7 +2,7 @@ title: My Deal Blog
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   Blogging about the best deals and strategies.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/github-pages-with-jekyll"
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 theme: minima
 plugins:

@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div class="deal-container">
+  <div class="deal-header">
+    <h1 class="deal-title">{{ page.title }}</h1>
+    <div class="deal-meta">
+      <span class="deal-store">@ {{ page.store }}</span>
+    </div>
+  </div>
+
+  <div class="deal-main">
+    <div class="deal-content">
+      {{ content }}
+      {% if page.amazon_disclosure %}
+      <p class="disclaimer"><small>Como asociado de Amazon, gano con las compras que califican.</small></p>
+      {% endif %}
+    </div>
+
+    <div class="deal-sidebar">
+      <div class="deal-pricing">
+        <span class="price-current">{{ page.price }}</span>
+        {% if page.list_price %}
+        <span class="price-list">{{ page.list_price }}</span>
+        {% endif %}
+      </div>
+      <a href="{{ page.link }}" class="deal-button" target="_blank" rel="nofollow noopener">Ver Oferta</a>
+    </div>
+  </div>
+</div>

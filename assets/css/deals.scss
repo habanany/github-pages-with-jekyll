@@ -1,0 +1,156 @@
+
+// Variables
+$deal-color-primary: #ff9900;
+$deal-color-price: #2e7d32; // Dark green
+$deal-color-list-price: #757575;
+$deal-color-text: #333;
+$deal-bg-color: #fff;
+$deal-border-color: #e0e0e0;
+
+.deal-container {
+  background: $deal-bg-color;
+  border: 1px solid $deal-border-color;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  .deal-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid $deal-border-color;
+    padding-bottom: 10px;
+
+    .deal-title {
+      font-size: 1.5rem;
+      margin: 0 0 10px;
+      color: $deal-color-text;
+    }
+
+    .deal-store {
+      font-size: 0.9rem;
+      color: $deal-color-list-price;
+      font-weight: 500;
+    }
+  }
+
+  .deal-main {
+    display: flex;
+    gap: 30px;
+  }
+
+  .deal-content {
+    flex: 1;
+    line-height: 1.6;
+    color: $deal-color-text;
+
+    .disclaimer {
+      margin-top: 20px;
+      color: $deal-color-list-price;
+      font-style: italic;
+    }
+  }
+
+  .deal-sidebar {
+    width: 250px; // Fixed width for sidebar on desktop
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1px solid $deal-border-color;
+    padding-left: 30px;
+    height: fit-content;
+
+    .deal-pricing {
+      margin-bottom: 15px;
+      text-align: center;
+
+      .price-current {
+        display: block;
+        font-size: 2rem;
+        font-weight: bold;
+        color: $deal-color-price;
+      }
+
+      .price-list {
+        display: block;
+        text-decoration: line-through;
+        color: $deal-color-list-price;
+        font-size: 1rem;
+      }
+    }
+
+    .deal-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $deal-color-primary;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      width: 100%;
+      text-align: center;
+      transition: background-color 0.2s;
+      box-sizing: border-box;
+
+      &:hover {
+        background-color: darken($deal-color-primary, 5%);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// Responsive Styles (Mobile)
+@media (max-width: 768px) {
+  .deal-container {
+    padding: 15px;
+
+    .deal-main {
+      flex-direction: column; // Stack vertically
+    }
+
+    .deal-sidebar {
+      width: 100%; // Full width
+      border-left: none;
+      border-top: 1px solid $deal-border-color;
+      padding-left: 0;
+      padding-top: 20px;
+      margin-top: 20px;
+      order: -1; // Optional: Put price button above content on mobile if desired, but user req implied "apilen vertically", usually checks content flow. Let's keep standard flow or check user preference.
+      // Re-reading: "Muestra el precio y el botón a la derecha del contenido." on desktop.
+      // Mobile: "Use @media... apilen vertically... Botón debe ocupar 100%".
+      // Usually "Price/Button" is high priority. I will move it to the top or below title but before long text content if possible, or just below content. 
+      // User didn't specify order, just "stack". Standard flow is title -> content -> sidebar (which becomes bottom).
+      // However, for Deals, seeing price/button first is often better.
+      // Let's stick to DOM order for now (Title -> Content -> Sidebar) unless standard practice suggests otherwise.
+      // Actually, standard Slickdeals mobile view often puts image/price/button very high up. 
+      // But based on my DOM: Title is in header (top). Main has Content then Sidebar.
+      // So on mobile it will be: Title -> Content -> Price/Button.
+      // This is "below the card" essentially for the button.
+      // Let's check: "El contenido del texto (la estrategia) debajo de la tarjeta." 
+      // Wait, user said: "El contenido del texto (la estrategia) debajo de la tarjeta." in point 1 layout description.
+      // Point 1: Container shows 1. Link, 2. Price Section 3. Store 4. Button 5. Text content.
+      // My DOM structure might be slightly off relative to that specific ordering request in Point 1 if I put content alongside button.
+      // Let's re-read Point 1 carefully:
+      // "Crea un contenedor deal-container que muestre:"
+      // * El título
+      // * Precios
+      // * Store
+      // * Button
+      // * Contenido del texto DEBAJO de la tarjeta.
+      
+      // Ah! "Debajo de la tarjeta". This implies the "Card" contains Title, Price, Button, etc., and the text is separate/below.
+      // BUT Point 2 says: "En pantallas grandes (Desktop): Muestra el precio y el botón a la derecha del contenido."
+      // This contradicts "Content below the card" unless "Content" means "Text Strategy" and "Card" means "Header info".
+      // Let's reconcile:
+      // Desktop: Left side = Text/Strategy? Or Left side = Title/Info? -> "Precio y botón a la derecha del contenido."
+      // This implies: Left Col: Content (Strategy). Right Col: Price/Button.
+      // This matches my current DOM structure (deal-content | deal-sidebar).
+      // If so, on mobile, they stack.
+      // Let's keep my current structure, it fits "Desktop: Right side" best.
+    }
+  }
+}

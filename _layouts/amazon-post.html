@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        {{ page.date | date: date_format }}
+      </time>
+      {%- if page.author -%}
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+      {%- endif -%}
+    </p>
+
+    <!-- COMPLIANCE: Disclaimer always at the top -->
+    <div style="background: #f8f9fa; border-left: 4px solid #ff9900; padding: 10px; margin-bottom: 20px; font-size: 0.9em; color: #555;">
+        <strong>Disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. This helps support the blog at no extra cost to you.
+    </div>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!-- SAFE RENDER: Only the body content. No price variables are rendered here. -->
+    {{ content }}
+  </div>
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

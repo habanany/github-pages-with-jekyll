@@ -7,3 +7,20 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 theme: minima
 plugins:
   - jekyll-feed
+
+collections:
+  deals:
+    output: true
+    permalink: /deals/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "amazon-post"
+  - scope:
+      path: ""
+      type: "deals"
+    values:
+      layout: "deal"
